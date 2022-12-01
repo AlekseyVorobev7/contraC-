@@ -1,1 +1,1 @@
-4
+Suma zadanyx 5 chisel = 5
