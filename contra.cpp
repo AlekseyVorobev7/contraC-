@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 
         if(args[i] == "-version")// версия                                                                                                                                               
         {
-            cout << "V 1.0.1" << ln;
+            cout << "V 1.0.2" << ln;
             re 0;                                                                                                         
         }
         
