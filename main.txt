@@ -1,1 +1,1 @@
-Suma zadanyx 5 chisel = 5
+Suma zadanyx 2 chisel = 4

@@ -13,7 +13,7 @@
 
 using namespace std;
 
-//map<string,string> m;
+map<string,string> m;
 
 bool is_digits(string str) // Проверка является ли строка числом
 {
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
     ll n = 2;// дефолтное значение
     ll ans = 0;
     string f = "a.txt";
-    
+    bool is_file_write = false;//флаг для проаерки(выводим ли в файл)(если true то результат будет выведен в файл с последним заданным аргументом -o)
     vector<string> args = to_string_vector(argv, argc); // перевод в вектор
 
     for(int i = 1; i < argc; i++)// цикл по всем аргументам
@@ -63,23 +63,24 @@ int main(int argc, char **argv)
             }
             else
             {
+                is_file_write = true;
                 f = args[i+1];
                 if(f.find_last_of('.') == string::npos)// проверка на то что задано расшерение файла
                 {
                     cout << "[Warnning] Ne zadan format txt dla fayla! Otet budet soxranen v fayle : " << f << ".txt" << ln;
                     f+=".txt"; //добавляем расшерение txt к файлу
-                    freopen(f.c_str(), "w",stdout);
-                    i++;
+                    //freopen(f.c_str(), "w",stdout);
+                    i++;// пропускаем значение аргумента
                 }
                 else
                 {
-                    vector<string> file = get_format_and_name(f);
+                    vector<string> file = get_format_and_name(f); // разбиваем на название файла и его формат
                     if(file[1] != ".txt")// Проверка расшерения файла
                     {
                         cout << "[Warnning] Neverniy format fayla! Otet budet soxranen v fayle : " << file[0] << ".txt" << ln;
-                        f = file[0] + ".txt";
-                        freopen(f.c_str(), "w",stdout);
-                        i++;
+                        f = file[0] + ".txt"; // добавляем к названию файла расшерение
+                        //freopen(f.c_str(), "w",stdout);
+                        i++;// пропускаем значение аргумента
                     }
                 }
             }
@@ -95,7 +96,7 @@ int main(int argc, char **argv)
 
         if(args[i] == "-version")// версия                                                                                                                                               
         {
-            cout << "V 1.0.2" << ln;
+            cout << "V 1.0.3" << ln;
             re 0;                                                                                                         
         }
         
@@ -129,13 +130,16 @@ int main(int argc, char **argv)
         }
     }   
 
-    
+    if(is_file_write)
+    {
+        freopen(f.c_str(), "w",stdout);
+    }
 
     for(ll i = 0; i < n;i++)
     {
-           ll x;
-           cin >> x;
-           ans+=x;
+        ll x;
+        cin >> x;
+        ans+=x;
     }
     
     cout << "Suma zadanyx " << n << " chisel = " << ans;
